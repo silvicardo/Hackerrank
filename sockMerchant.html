@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SockMerchant</title>
+  </head>
+  <body>
+
+  <script type="text/javascript">
+
+    /***** The sockMerchant ****/
+
+    /*
+    John works at a clothing store. He has a large pile of socks that he must pair by color for sale. Given an array of integers representing the color of each sock, determine how many pairs of socks with matching colors there are.
+
+    For example, there are  socks with colors . There is one pair of color  and one of color . There are three odd socks left, one of each color. The number of pairs is .
+
+    Function Description
+
+    Complete the sockMerchant function in the editor below. It must return an integer representing the number of matching pairs of socks that are available.
+
+    sockMerchant has the following parameter(s):
+
+    n: the number of socks in the pile
+    ar: the colors of each sock
+    Input Format
+
+    The first line contains an integer , the number of socks represented in .
+    The second line contains  space-separated integers describing the colors  of the socks in the pile.
+
+    Constraints
+
+     where
+    Output Format
+
+    Return the total number of matching pairs of socks that John can sell.
+
+    Sample Input
+
+    9
+    10 20 20 10 10 30 50 10 20
+    Sample Output
+
+    3
+    Explanation
+
+    sock.png
+
+    John can match three pairs of socks.
+
+    */
+
+
+    // Complete the sockMerchant function below.
+
+    function sockMerchant(n, ar) {
+
+        //Get an array with all of the found colors
+
+        var socksColors = ar.reduce((colors, nextColor, index, array) => {
+
+            if (!colors.includes(nextColor)) {
+                colors.push(nextColor);
+            }
+
+            return colors;
+
+        }, []);
+
+        //get nr of pairs
+        var pairs = socksColors.reduce((nrOfPairs, nextColor, index, array) => {
+
+            //count of the array of instances of that color represented by a number
+            var socksWithColor = ar.filter(thisSockColor => thisSockColor === nextColor).length;
+
+            //if socksWithThisColor results to an even number an even number add to
+            //the total of pairs, otherwise cut the excess and add it to the total
+            var pairsForThisColor = (socksWithColor % 2 === 0) ? (socksWithColor / 2) : (socksWithColor / 2 - 0.5);
+
+            nrOfPairs += pairsForThisColor;
+
+            //Each time return the number of Pairs
+            return nrOfPairs;
+        }, 0);
+
+        return pairs;
+
+    }
+
+  </script>
+
+  </body>
+</html>
